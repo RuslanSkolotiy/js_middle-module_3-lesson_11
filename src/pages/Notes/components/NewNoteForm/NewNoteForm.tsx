@@ -1,6 +1,7 @@
 import { Button, Group, Modal, TextInput } from "@mantine/core";
 import { useNotes } from "../../../../context";
 import { useForm } from '@mantine/form';
+import { useNavigate } from "react-router-dom";
 
 interface FormValues {
     title: string;
@@ -9,6 +10,7 @@ interface FormValues {
 const NewNoteForm: React.FC = () => {
 
     const { showAddForm, setShowAddForm, addNote } = useNotes();
+    const navigate = useNavigate();
 
     const close = (): void => {
         setShowAddForm(false);
@@ -23,11 +25,12 @@ const NewNoteForm: React.FC = () => {
         },
     });
 
-    const handleSubmit = (values: FormValues): void => {
-        addNote(values.title, '');
+    const handleSubmit = async (values: FormValues): void => {
+        const id = await addNote(values.title, '');
         form.clearErrors();
         form.reset();
         close();
+        navigate(`/notes/${id}`);
     }
 
     return (<Modal opened={showAddForm} onClose={close} title="Creating new note">

@@ -18,7 +18,8 @@ const Notes: React.FC<NotesProps> = ({ noWorkspace = false }) => {
                 main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
             })}
         >
-            {noWorkspace ? <WorkspacePlug /> : <><ControlBox /><Workspace /><NewNoteForm /><EditNoteForm /><DeleteNoteForm /></>}
+            {noWorkspace ? <WorkspacePlug /> : <><ControlBox /><Workspace /><EditNoteForm /><DeleteNoteForm /></>}
+            <NewNoteForm />
         </AppShell>
     )
 }
